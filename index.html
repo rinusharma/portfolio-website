@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rinu Sharma — Lead Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg:        #f8f9fb;
+      --color-surface:   #ffffff;
+      --color-border:    #e4e7ed;
+      --color-accent:    #2563eb;
+      --color-accent-lt: #eff4ff;
+      --color-text:      #1a1f2e;
+      --color-muted:     #6b7280;
+      --radius:          10px;
+      --shadow-sm:       0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+      --shadow-md:       0 4px 16px rgba(0,0,0,.08);
+      --max-w:           860px;
+      --nav-h:           64px;
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--color-text);
+      background: var(--color-bg);
+    }
+
+    /* ── Header / Nav ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-border);
+      height: var(--nav-h);
+    }
+
+    nav {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.15rem;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: color .18s, background .18s;
+    }
+
+    nav a:hover {
+      color: var(--color-accent);
+      background: var(--color-accent-lt);
+    }
+
+    /* ── Main layout ── */
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    /* ── Typography ── */
+    h1 { font-size: 2.4rem; font-weight: 700; line-height: 1.2; letter-spacing: -.02em; }
+    h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: 1.5rem; }
+    h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+
+    h2 {
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--color-accent);
+      display: inline-block;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    #hero h1 { margin-bottom: 0.75rem; }
+
+    #hero p:first-of-type {
+      font-size: 1.1rem;
+      color: var(--color-accent);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    #hero p:last-of-type {
+      color: var(--color-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ── About ── */
+    #about .about-inner {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      margin-top: 1.5rem;
+    }
+
+    #about img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--color-border);
+      flex-shrink: 0;
+    }
+
+    #about p { color: var(--color-muted); }
+
+    /* ── Skills chips ── */
+    #skills ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    #skills li {
+      background: var(--color-accent-lt);
+      color: var(--color-accent);
+      border: 1px solid #c7d9fd;
+      border-radius: 20px;
+      padding: 0.35rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* ── Bullet-list sections (delivery, technical) ── */
+    #delivery ul,
+    #technical ul {
+      list-style: none;
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    #delivery li,
+    #technical li {
+      padding: 1rem 1.25rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--color-accent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      font-size: 0.925rem;
+      color: var(--color-muted);
+    }
+
+    #delivery li strong,
+    #technical li strong { color: var(--color-text); }
+
+    /* ── Cards (education, experience, research) ── */
+    #education article,
+    #experience article,
+    #research article {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
+    }
+
+    #education article:hover,
+    #experience article:hover,
+    #research article:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    #education article p,
+    #experience article p,
+    #research article p {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      margin-top: 0.2rem;
+    }
+
+    #experience article ul,
+    #research article ul {
+      margin-top: 0.75rem;
+      padding-left: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    #experience article li,
+    #research article li {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+
+    #experience article li strong,
+    #research article li strong { color: var(--color-text); }
+
+    /* ── Certifications ── */
+    #certifications h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-top: 1.5rem;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    #certifications ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+
+    #certifications li {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    #certifications li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-size: 0.8rem;
+      top: 0.05rem;
+    }
+
+    /* ── Contact form ── */
+    .contact-list {
+      list-style: none;
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .contact-list li {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+    }
+
+    .contact-list li strong {
+      color: var(--color-text);
+      margin-right: 0.4rem;
+    }
+
+    .contact-list a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .contact-list a:hover { text-decoration: underline; }
+
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 540px;
+      margin-top: 1.5rem;
+    }
+
+    #contact label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    #contact input,
+    #contact textarea {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid var(--color-border);
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 0.925rem;
+      color: var(--color-text);
+      background: var(--color-surface);
+      transition: border-color .18s, box-shadow .18s;
+      outline: none;
+    }
+
+    #contact input:focus,
+    #contact textarea:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+
+    #contact textarea { resize: vertical; min-height: 120px; }
+
+    #contact button {
+      align-self: flex-start;
+      padding: 0.65rem 1.75rem;
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 0.925rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .18s, transform .15s;
+    }
+
+    #contact button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.875rem;
+      color: var(--color-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    footer ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    footer a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      text-decoration: none;
+      transition: color .18s;
+    }
+
+    footer a:hover { color: var(--color-accent); }
+
+    /* ── Hamburger button ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+      margin-left: auto;
+      border-radius: 6px;
+      transition: background .18s;
+    }
+
+    .nav-toggle:hover { background: var(--color-accent-lt); }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transition: transform .25s, opacity .25s;
+    }
+
+    /* Animate to × when open */
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Tablet (≤ 768px) ── */
+    @media (max-width: 768px) {
+      :root { --nav-h: auto; }
+
+      header { height: auto; }
+
+      nav {
+        flex-wrap: wrap;
+        padding: 0.75rem 1.25rem;
+        gap: 0.5rem;
+      }
+
+      .nav-brand {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--color-text);
+        margin-right: auto;
+      }
+
+      nav ul {
+        width: 100%;
+        gap: 0.2rem 0.1rem;
+      }
+
+      nav a { font-size: 0.82rem; padding: 0.3rem 0.6rem; }
+
+      main { padding: 0 1.25rem 3rem; }
+
+      section { padding: 2.25rem 0; }
+
+      h1 { font-size: 2rem; }
+
+      #hero { padding: 3rem 0 2.5rem; }
+
+      #education article,
+      #experience article,
+      #research article { padding: 1rem 1.1rem; }
+    }
+
+    /* ── Mobile (≤ 520px) ── */
+    @media (max-width: 520px) {
+      :root { --nav-h: auto; }
+
+      header { height: auto; }
+
+      nav {
+        padding: 0 1rem;
+        height: auto;
+        align-items: center;
+        flex-wrap: nowrap;
+        min-height: 56px;
+      }
+
+      .nav-brand {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-text);
+        white-space: nowrap;
+      }
+
+      .nav-toggle { display: flex; }
+
+      /* Hidden by default on mobile; shown when .open */
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.15rem;
+        padding: 0.5rem 0 0.75rem;
+        border-top: 1px solid var(--color-border);
+        margin-top: 0.5rem;
+      }
+
+      nav ul.open { display: flex; }
+
+      nav a {
+        font-size: 0.9rem;
+        padding: 0.55rem 0.75rem;
+        width: 100%;
+      }
+
+      /* Wrap nav contents to allow ul to go full width below */
+      nav { flex-wrap: wrap; }
+
+      main { padding: 0 1rem 2.5rem; }
+
+      section { padding: 2rem 0; }
+
+      h1 { font-size: 1.65rem; }
+      h2 { font-size: 1.2rem; }
+
+      #hero { padding: 2.25rem 0 2rem; }
+
+      #hero p:first-of-type { font-size: 0.95rem; }
+
+      #about .about-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      #about img { width: 100px; height: 100px; }
+
+      #delivery li,
+      #technical li { padding: 0.85rem 1rem; font-size: 0.875rem; }
+
+      #education article,
+      #experience article,
+      #research article {
+        padding: 0.9rem 1rem;
+        /* Disable lift on mobile to avoid accidental tap triggers */
+        transition: none;
+      }
+
+      #education article:hover,
+      #experience article:hover,
+      #research article:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+      }
+
+      #skills li { font-size: 0.82rem; padding: 0.3rem 0.85rem; }
+
+      .contact-list li { font-size: 0.9rem; }
+
+      footer ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+<button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#delivery">Delivery</a></li>
+        <li><a href="#technical">Technical</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="hero">
+      <h1>Rinu Sharma</h1>
+      <p>Lead Software Engineer &mdash; Digital Platforms &bull; AI Enablement &bull; Cloud Solutions</p>
+      <p>Based in Singapore</p>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about-inner">
+        <img src="profilepic.png" alt="Profile photo of Rinu Sharma" width="150">
+        <p>
+          AI Solutions &amp; Digital Transformation Lead with 10+ years of experience driving digital
+          initiatives and enabling business adoption of technology solutions in financial services.
+          Skilled in defining AI use cases, collaborating with engineering teams to deliver intelligent
+          solutions, and guiding stakeholders through adoption and change. Strong ability to translate
+          business needs into AI-enabled workflows, support implementation, and drive user engagement
+          through training, communication, and continuous improvement.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul>
+        <li>Business Analysis</li>
+        <li>Agile / Scrum</li>
+        <li>AI &amp; Automation</li>
+        <li>Cloud Platforms</li>
+        <li>API Integration</li>
+        <li>Stakeholder Management</li>
+      </ul>
+    </section>
+
+    <section id="delivery">
+      <h2>Delivery &amp; Stakeholder Management</h2>
+      <ul>
+        <li>
+          <strong>End-to-End Digital Delivery:</strong> Lead enterprise digital initiatives from
+          discovery and planning through execution, release, and continuous improvement, delivering
+          high-velocity outcomes in regulated financial services environments.
+        </li>
+        <li>
+          <strong>Business &amp; Product Alignment:</strong> Lead business discovery workshops with
+          stakeholders to define end-to-end customer journeys, translating business needs into
+          functional, non-functional, and data requirements, user stories, and acceptance criteria
+          in Jira/Confluence.
+        </li>
+        <li>
+          <strong>Cross-Functional Leadership:</strong> Work closely with marketing, product, and
+          engineering teams to align priorities, resolve delivery risks, and ensure solutions meet
+          both business and technical goals.
+        </li>
+        <li>
+          <strong>Agile &amp; Governance Oversight:</strong> Drive Scrum and hybrid delivery models,
+          managing backlog prioritization, sprint ceremonies, release governance, and delivery
+          accountability.
+        </li>
+        <li>
+          <strong>SDLC &amp; Compliance Management:</strong> Partner with QA teams to support UAT
+          planning, testing, and release validation, ensuring compliance with enterprise standards.
+        </li>
+        <li>
+          <strong>Decision-Making &amp; Execution Excellence:</strong> Apply structured
+          problem-solving, communication, and risk management to deliver outcomes on time while
+          balancing quality and speed.
+        </li>
+      </ul>
+    </section>
+
+    <section id="technical">
+      <h2>Technical Expertise</h2>
+      <ul>
+        <li>
+          <strong>Core Backend &amp; Frameworks:</strong> Java, JSP, Servlets, Spring Boot,
+          Spring Data JPA, Hibernate (ORM), SQL, RESTful API Design.
+        </li>
+        <li>
+          <strong>Computer Science Fundamentals:</strong> Strong foundation in Data Structures
+          &amp; Algorithms, Object-Oriented Programming (OOP), Design Principles.
+        </li>
+        <li>
+          <strong>Web Technologies:</strong> HTML, CSS, JavaScript.
+        </li>
+        <li>
+          <strong>Cloud &amp; Architecture:</strong> Adobe Cloud Services, API-led &amp; Headless
+          Architectures (AEM), Scalable Platform Design, Distributed Systems, System Integrations.
+        </li>
+        <li>
+          <strong>Enterprise Platforms:</strong> Adobe Experience Manager (AEM Sites &amp; Assets),
+          Adobe Experience Cloud.
+        </li>
+        <li>
+          <strong>AI &amp; Emerging Technologies:</strong> Azure AI Services (NLP, Computer Vision,
+          Machine Learning), Generative AI Roadmap Development, Python (Foundational).
+        </li>
+        <li>
+          <strong>Quality &amp; Automation:</strong> Selenium (Automated Testing Frameworks),
+          CI/CD Pipeline Integration (Bamboo), Bitbucket (Version Control), Confluence,
+          Unit Testing (JUnit).
+        </li>
+        <li>
+          <strong>Methodology &amp; Governance:</strong> Certified Scrum Master (CSM),
+          Agile/Scrum/Hybrid Delivery, SDLC Governance, Code Review, Technical Solution Design.
+        </li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2>Academic Qualifications</h2>
+
+      <article>
+        <h3>M.Tech, Software Engineering</h3>
+        <p>National University of Singapore, Singapore</p>
+        <p>2014 &mdash; GPA: 3.64</p>
+      </article>
+
+      <article>
+        <h3>B.Tech, Information Technology</h3>
+        <p>Sathyabama University, Chennai, India</p>
+        <p>2008 &mdash; 87.12%</p>
+      </article>
+    </section>
+
+    <section id="experience">
+      <h2>Work Experience</h2>
+
+      <article>
+        <h3>Lead Software Engineer</h3>
+        <p>Great Eastern Life Assurance, Singapore &mdash; Feb 2016 &ndash; Present</p>
+        <ul>
+          <li><strong>System Architecture &amp; Development:</strong> Designed and implemented Spring Boot microservices to support enterprise digital platforms, integrating AEM-based front-end portals with legacy insurance systems.</li>
+          <li><strong>API &amp; Data Integration:</strong> Engineered secure RESTful API integrations to handle sensitive customer form data, leveraging Hibernate/JPA for efficient data persistence.</li>
+          <li><strong>DevOps &amp; Automation:</strong> Built automated regression framework reducing test cycles by 87%.</li>
+          <li><strong>Cloud-Native Evolution:</strong> Led the migration to Adobe Cloud, designing microservices and secure data-handling protocols to protect customer PII within a highly regulated financial environment.</li>
+          <li><strong>Full-Stack Leadership:</strong> Collaborated with business stakeholders to translate complex requirements into scalable technical solutions across the full SDLC, ensuring traceability, governance alignment, and delivery readiness.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Business &amp; Technology Lead</h3>
+        <p>Decision Science Agency Pte Ltd, Singapore &mdash; Jan 2015 &ndash; Jan 2016</p>
+        <ul>
+          <li>Partnered with clients to translate business needs into practical technical requirements and functional workflows.</li>
+          <li>Managed backlogs and sprint planning for Agile feature delivery, ensuring solutions aligned with business objectives.</li>
+          <li>Developed Adobe CQ/AEM components and templates to optimize CMS-based web platforms and digital experiences.</li>
+          <li>Integrated various modules to ensure smooth, high-performing website functionality and delivery governance.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Programmer Analyst</h3>
+        <p>Cognizant Technology Solutions, India &mdash; Feb 2009 &ndash; Mar 2011</p>
+        <ul>
+          <li>Developed Java-based enterprise applications supporting telecom billing and provisioning workflows.</li>
+          <li>Contributed to backend modules across SDLC including design, development, and performance testing.</li>
+          <li>Delivered complex solutions for global telecom projects (Nokia Siemens Networks, TELUS, Bouygues Telecom) under tight deadlines.</li>
+          <li>Acted as a liaison between domestic teams and international clients to ensure alignment across time zones.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="research">
+      <h2>Applied Research &amp; Technical Projects</h2>
+
+      <article>
+        <h3>M3 Recommendation System for Business Continuity</h3>
+        <p>A*STAR (IHPC), Singapore</p>
+        <ul>
+          <li>Developed a real-time, cloud-based monitoring system to model and manage complex supply chain networks, ensuring business continuity through data-driven insights.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Hadoop-based Movie Recommendation Engine</h3>
+        <ul>
+          <li>Built a large-scale recommendation system using Hadoop to analyze user data and generate actionable insights into professional group preferences.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Re-Architecting Test Case Clone Analyzer (Eclipse Plugin)</h3>
+        <ul>
+          <li>Enhanced a research-level visualization tool for code redundancy. Integrated open-source components, optimized data layers, and implemented CI/CD for time-boxed Agile delivery.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="certifications">
+      <h2>Certifications &amp; Professional Recognition</h2>
+
+      <h3>AI &amp; Cloud Credentials</h3>
+      <ul>
+        <li>Microsoft Certified: Azure AI Fundamentals (AI-900) &mdash; Credential ID: DE1A1C7555E4D4B7</li>
+        <li>Natural Language Processing in Microsoft Azure &mdash; Credential ID: 2D7WFSND84UW</li>
+        <li>Computer Vision in Microsoft Azure &mdash; Credential ID: YD1PSVL31QUS</li>
+        <li>Microsoft Azure Machine Learning &mdash; Credential ID: HP1XM0Y4OBFE</li>
+        <li>Google AI Essentials (2026) &mdash; Credential ID: GFH50ETMZZ94</li>
+        <li>Introduction to Data Analytics &ndash; IBM (2026) &mdash; Credential ID: 91WFP4N2UD44</li>
+      </ul>
+
+      <h3>Other Certifications</h3>
+      <ul>
+        <li>Adobe Certified Professional &ndash; Adobe Experience Manager Business Practitioner (AD0-E138)</li>
+        <li>Certified Scrum Master (CSM)</li>
+      </ul>
+
+      <h3>Professional Recognition</h3>
+      <ul>
+        <li>Recognized by senior management and clients for outstanding contributions to digital initiatives and successful project deliveries.</li>
+        <li>Received the &ldquo;Spotlight Award&rdquo; for outstanding delivery of multiple initiatives within aggressive timelines while maintaining strong quality and compliance standards.</li>
+        <li>Graduated as top ranker in B.Tech (Information Technology) and received multiple merit certificates for academic excellence.</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <ul class="contact-list">
+        <li><strong>Mobile:</strong> <a href="tel:+6583841346">+65 83841346</a></li>
+        <li><strong>E-mail:</strong> <a href="mailto:rinusharma157@gmail.com">rinusharma157@gmail.com</a></li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/rinu-sharma" target="_blank" rel="noopener noreferrer">linkedin.com/in/rinu-sharma</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Rinu Sharma. All rights reserved.</p>
+    <ul>
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Twitter</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navUl  = document.querySelector('nav ul');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = navUl.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menu when a nav link is tapped
+    navUl.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navUl.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', false);
+      });
+    });
+  </script>
+</body>
+</html>
